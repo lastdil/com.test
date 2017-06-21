@@ -5,39 +5,30 @@ package cms.api.tests;
 
 import cms.utils.RandomIdHelper;
 import cms.utils.RandomUserHelper;
-import org.hamcrest.Matchers;
-import org.testng.annotations.BeforeTest;
+
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static com.sun.javafx.fxml.expression.Expression.notEqualTo;
-import static io.restassured.RestAssured.expect;
-import static io.restassured.RestAssured.given;
-import static io.restassured.RestAssured.when;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.not;
+import static io.restassured.RestAssured.*;
 
-public class TagCreate {
-    private static String uri = "http://pre-cms.spb.play.dc/";
-    private static String username = "npletnyova";
-    private static String pwd = "Nata9756m##";
+public class TagCreate extends BaseTest {
     private static RandomIdHelper randomIdHelper;
     private static RandomUserHelper randomUserHelper;
+
     public String uid;
     public int userId;
 
 
-    @BeforeTest
-    public String generateUid() { // show uid from RandomIdHelper
+    @BeforeClass
+    public void generateUid() { // show uid from RandomIdHelper
         randomIdHelper = new RandomIdHelper();
         uid = randomIdHelper.generateRandomId();
-        return uid;
-    }
-
-    public int generateUser() {
         randomUserHelper = new RandomUserHelper();
         userId = randomUserHelper.generateRandomUser();
-        return userId;
+
+
     }
+
 
     /**
      * @BeforeTest public void generateUidUser() { // show uid from RandomIdHelper
@@ -54,13 +45,10 @@ public class TagCreate {
                 " \"id\": \"" + uid + "\" \n" + "}";
         if (uid != null && !uid.isEmpty()) {
             given()
-                    .baseUri(uri)
-                    .contentType("application/json;charset=utf-8")
-                    .body(myJsonTag).log().all()
-                    .auth().preemptive().basic(username, pwd)
-                    //.expect().body(uid,  notEqualTo(0))
+                    .spec(requestSpec)
+                    .body(myJsonTag)
                     .when().put("tags/1")
-                    .then().log().all().statusCode(200);
+                    .then().spec(responseSpec);
         } else {
             System.out.println("Error!");
         }
@@ -76,16 +64,14 @@ public class TagCreate {
         if (userId != 0) {
 
             given()
-                    .baseUri(uri)
-                    .contentType("application/json;charset=utf-8")
-                    .body(myJsonUserTag).log().all()
-                    .auth().preemptive().basic(username, pwd)
-                    //.expect().body(userId,  notEqualTo(0))
+                    .spec(requestSpec)
+                    .body(myJsonUserTag)
                     .when().put("/usertags")
-                    .then().log().all().statusCode(200);
+                    .then().spec(responseSpec);
         } else {
             System.out.println("Error2!");
         }
+
     }
 }
 
