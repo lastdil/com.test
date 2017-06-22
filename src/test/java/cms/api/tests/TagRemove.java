@@ -2,14 +2,11 @@ package cms.api.tests;
 
 import cms.utils.RandomIdHelper;
 import cms.utils.RandomUserHelper;
-import io.restassured.response.ValidatableResponse;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.notNullValue;
 
-import org.testng.annotations.BeforeTest;
 
 /**
  * Created by npletnyova on 15.06.2017.

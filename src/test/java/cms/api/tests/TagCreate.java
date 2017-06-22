@@ -5,6 +5,8 @@ package cms.api.tests;
 
 import cms.utils.RandomIdHelper;
 import cms.utils.RandomUserHelper;
+import cms.utils.objects.UserTag;
+import cms.utils.objects.User;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -17,6 +19,8 @@ public class TagCreate extends BaseTest {
 
     public String uid;
     public int userId;
+    UserTag userTag = new UserTag();
+    User user = new User();
 
 
     @BeforeClass
@@ -25,8 +29,6 @@ public class TagCreate extends BaseTest {
         uid = randomIdHelper.generateRandomId();
         randomUserHelper = new RandomUserHelper();
         userId = randomUserHelper.generateRandomUser();
-
-
     }
 
 
@@ -41,12 +43,13 @@ public class TagCreate extends BaseTest {
 
     @Test
     public void createTag() { // create tag with random id from RandomIdHelper ("id":"uid")
-        String myJsonTag = "{\n" +
-                " \"id\": \"" + uid + "\" \n" + "}";
-        if (uid != null && !uid.isEmpty()) {
+
+        userTag.setId(uid);
+
+        if (uid != null) {
             given()
                     .spec(requestSpec)
-                    .body(myJsonTag)
+                    .body(userTag)
                     .when().put("tags/1")
                     .then().spec(responseSpec);
         } else {
@@ -57,15 +60,13 @@ public class TagCreate extends BaseTest {
 
     @Test
     public void putTagToUser() { // add tag from createTag to random user from RandomUserHelper
-        String myJsonUserTag = "{\n" +
-                " \"userId\": \"" + userId + "\", \n" +
-                " \"tag\": \"" + uid + "\"\n" +
-                "}";
-        if (userId != 0) {
+        user.setUserId(userId);
+        user.setTag(uid);
+        if (userId != 0 && userId > 0) {
 
             given()
                     .spec(requestSpec)
-                    .body(myJsonUserTag)
+                    .body(user)
                     .when().put("/usertags")
                     .then().spec(responseSpec);
         } else {
