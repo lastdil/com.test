@@ -31,18 +31,12 @@ public class TagRemove extends BaseTest {
     @Test
     public void deleteTagFromUser() { // delete all tags from specified user
 
-        given()
-                .spec(requestSpec)
-                .when().delete("/usertags/user/{userId}", userId)
-                .then().spec(responseSpec);
+        given().spec(requestSpec).when().delete("/usertags/user/{userId}", userId).then().spec(responseSpec);
     }
 
     @Test
     public void deleteTag() { //delete item by id and schemaVersion
-        given()
-                .spec(requestSpec)
-                .when().delete("/tags/1/{id}", uid)
-                .then().spec(responseSpec);
+        given().spec(requestSpec).when().delete("/tags/1/{id}", uid).then().spec(responseSpec);
 
     }
 }

@@ -47,11 +47,7 @@ public class TagCreate extends BaseTest {
         userTag.setId(uid);
 
         if (uid != null) {
-            given()
-                    .spec(requestSpec)
-                    .body(userTag)
-                    .when().put("tags/1")
-                    .then().spec(responseSpec);
+            given().spec(requestSpec).body(userTag).when().put("tags/1").then().spec(responseSpec);
         } else {
             System.out.println("Error!");
         }
@@ -64,13 +60,9 @@ public class TagCreate extends BaseTest {
         user.setTag(uid);
         if (userId != 0 && userId > 0) {
 
-            given()
-                    .spec(requestSpec)
-                    .body(user)
-                    .when().put("/usertags")
-                    .then().spec(responseSpec);
+            given().spec(requestSpec).body(user).when().put("/usertags").then().spec(responseSpec);
         } else {
-            System.out.println("Error2!");
+            System.out.println("Unable to get userId!" + userId);
         }
 
     }

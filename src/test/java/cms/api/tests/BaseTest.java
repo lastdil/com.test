@@ -28,19 +28,14 @@ public class BaseTest {
                 .addHeader("Authorization", "Basic bnBsZXRueW92YTpOYXRhOTc1Nm0jIw==")
                 .setContentType(ContentType.fromContentType("application/json;charset=utf-8"))
                 .setBaseUri(URI)
-                .addFilter(new RequestLoggingFilter())
-                .addFilter(new ResponseLoggingFilter());  //log request and response for better debugging. You can also only log if a requests fails.
+                .addFilter(new RequestLoggingFilter()).addFilter(new ResponseLoggingFilter());  //log request and response for better debugging. You can also only log if a requests fails.
         requestSpec = builder.build();
     }
 
     @BeforeMethod
     public static void setupResponseSpecBuilder() {
-        builder1 = new ResponseSpecBuilder()
-
-                .expectStatusCode(200);
-
+        builder1 = new ResponseSpecBuilder().expectStatusCode(200);
         //builder1.expectBody(containsString("Your Website Title"));
-
         responseSpec = builder1.build();
 
 
