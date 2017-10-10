@@ -1,7 +1,7 @@
 package cms.utils.objects;
 
 
-public class UserTag {
+class UserTag {
     private String id;
 
 
@@ -13,5 +13,7 @@ public class UserTag {
         this.id = id;
     }
 
-
+    public UserTag(String id) {
+        this.id = id;
+    }
 }

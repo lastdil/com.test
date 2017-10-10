@@ -5,6 +5,7 @@ import java.util.Random;
 /**
  * Created by npletnyova on 14.06.2017.
  */
+
 public class RandomIdHelper {
     public String generateRandomId() {
         String alphabet = "abcdefghijklmnopqrstuvwxyz";

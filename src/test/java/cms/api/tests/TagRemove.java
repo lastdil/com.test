@@ -12,18 +12,17 @@ import static io.restassured.RestAssured.given;
  * Created by npletnyova on 15.06.2017.
  */
 
+
 public class TagRemove extends BaseTest {
-    public String uid;
-    public int userId;
-    private static RandomIdHelper randomIdHelper;
-    private static RandomUserHelper randomUserHelper;
+    private String uid;
+    private int userId;
 
 
     @BeforeClass
     public void writeUid() {
-        randomIdHelper = new RandomIdHelper();
+        RandomIdHelper randomIdHelper = new RandomIdHelper();
         uid = randomIdHelper.generateRandomId();
-        randomUserHelper = new RandomUserHelper();
+        RandomUserHelper randomUserHelper = new RandomUserHelper();
         userId = randomUserHelper.generateRandomUser();
     }
 
